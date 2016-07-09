@@ -1,3 +1,13 @@
+; DNS Updater is Copyright (C) 2016, Arturo Espinosa Aldama
+;
+; arturoea@gmail.com
+; Licensed under the GNU GPLv3, see the LICENSE file for licensing terms.
+;
+; This software is provided as-is, with no guarantees over its usefulness,
+; performance or adequacy. Use at our own risk.
+;
+; Source code available at https://github.com/pupitetris/DNS-Updater
+
 #include <AutoItConstants.au3>
 #include <EditConstants.au3>
 #include <Constants.au3>
@@ -95,6 +105,9 @@ GUIRegisterMsg ($WM_COMMAND, "EventCommand")
 
 Global $staticApplyButton = GUICtrlCreateButton (" Change ", $GRID * 17, $GRID * 7.75)
 GUICtrlSetOnEvent ($staticApplyButton, "EventStaticApplyButton")
+
+Global $aboutButton = GUICtrlCreateButton ("About...", $WIDTH - ($GRID * 6), $GRID * 7.75, $GRID * 5)
+GUICtrlSetOnEvent ($aboutButton, "EventAboutButton")
 
 GetInterfaceState ($ifDefault)
 
@@ -255,6 +268,19 @@ Func EventStaticApplyButton ()
 
    RegWrite ($REG_BASE & "\Static", $ifName, "REG_SZ", $ip)
    ApplyStaticIP ()
+EndFunc
+
+Func EventAboutButton ()
+   MsgBox (BitOR ($MB_OK, $MB_ICONINFORMATION), "About DNS Updater", _
+	  "DNS Updater is Copyright (C) 2016, Arturo Espinosa Aldama" & @CRLF & _
+	  @CRLF & _
+	  "arturoea@gmail.com" & @CRLF & _
+	  "Licensed under the GNU GPLv3, see the LICENSE file for licensing terms." & @CRLF & _
+	  @CRLF & _
+	  "This software is provided as-is, with no guarantees over its usefulness," & @CRLF & _
+	  "performance or adequacy. Use at our own risk." & @CRLF & _
+	  @CRLF & _
+	  "Source code available at https://github.com/pupitetris/DNS-Updater")
 EndFunc
 
 Func EventTrayPriDouble ()
